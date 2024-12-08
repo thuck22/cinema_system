@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.7"
+  },
+  "name": "cinema_management",
+  "version": "1.0.0",
+  "description": "This is project for database system course",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thuck22/cinema_system.git"
+  },
+  "keywords": [
+    "cinema"
+  ],
+  "author": "thuck22",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thuck22/cinema_system/issues"
+  },
+  "homepage": "https://github.com/thuck22/cinema_system#readme"
+}
