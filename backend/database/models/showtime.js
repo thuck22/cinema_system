@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Showtime.init({
-    showtimerId:{
+    showtimeId: {
       type: DataTypes.STRING,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isIn: [['2D','3D','IMAX']],
+        isIn: [['2D', '3D', 'IMAX']],
       },
     },
     startTime: {
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TIME,
       allowNull: false,
     },
-  },{
+  }, {
     sequelize,
     modelName: 'Showtime',
   });

@@ -6,10 +6,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-    
+
   }
   Movie.init({
-    movieId:{
+    movieId: {
       type: DataTypes.STRING,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
@@ -23,18 +23,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     premiereDay: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     trailer: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    duration: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },{
+    duration: DataTypes.INTERGER
+  }, {
     sequelize,
     modelName: 'Movie',
   });

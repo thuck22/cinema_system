@@ -6,13 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-    
+
   }
   Theater.init({
-    theaterId:{
-      type: DataTypes.STRING,
+    theaterId: {
+      type: DataTypes.INTERGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+      autoIncrement: true,
     },
     theaterName: {
       type: DataTypes.STRING,
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  },{
+  }, {
     sequelize,
     modelName: 'Theater',
   });

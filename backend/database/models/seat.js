@@ -10,37 +10,25 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-    
+
   }
   Seat.init({
-    seatId:{
-      type: DataTypes.STRING,
-      primaryKey: true,
-    },
-    theaterId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    cinemaroomId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-   //  what are room types?
+    seatId: DataTypes.STRING,
+    roomId: DataTypes.STRING,
     seatType: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isIn: [['SINGLE','COUPLE','VIP']],
+        isIn: [['SINGLE', 'COUPLE', 'VIP']],
       },
     },
-    // reference seat price entity
-    //add store precedure
     seatPrice: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 20
     },
-  },{
+    status: DataTypes.BIT
+  }, {
     sequelize,
     modelName: 'Seat',
   });

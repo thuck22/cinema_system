@@ -6,23 +6,22 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-    
+
   }
   Ticket.init({
-    ticketId:{
+    ticketId: {
       type: DataTypes.STRING,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
     },
-    customerEmail:{
+    customerEmail: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    orderId:{
+    orderId: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    showtimeId:{
+    showtimeId: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -36,11 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     boughtTime: {
-      type: DataTypes.DATE,
+      type: DataTypes.TIME,
       allowNull: false,
       defaultValue: sequelize.Now
     },
-  },{
+  }, {
     sequelize,
     modelName: 'Ticket',
   });
