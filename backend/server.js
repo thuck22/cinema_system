@@ -1,13 +1,11 @@
 const express = require('express')
-const viewEngine = require('./src/config/viewEngine');
+const viewEngine = require('./config/viewEngine');
+const initWebRoutes = require('./route/app')
 
 const app = express()
-const port = 8080
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-
+const port = 8000
+viewEngine(app)
+initWebRoutes(app)
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
