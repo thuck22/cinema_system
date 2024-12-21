@@ -1,61 +1,49 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import LoginInterface from './login/login'
-import HomePage from './users/home'
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import Login from "./login/Login";
+import Home from "./users/Home/Home";
+import Booking from "./users/booking/Booking";
+import MovieDetail from './users/movieDetail/movieDetail';
+import SeatSelection from './users/seat/SeatSelection';
+import Navbar from './users/navbar/Navbar'; // Import Navbar component
+import Confirmation from "./users/Confirm";
 
-function User(props) {
-  const [state, setState] = useState(props.getStateFromParent);
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
   return (
-    <>
-      <Header passState={state} setStateLogOut={props.setStateLogOut} />{" "}
-      {/* Header luôn hiển thị trên mọi trang */}
+    <Router>
+      {/* Hiển thị Navbar nếu đã đăng nhập */}
+      {isAuthenticated && <Navbar />}
+
       <Routes>
-        {/* Định nghĩa đường dẫn gốc hiển thị trang chủ */}
+        {/* Route cho Login */}
+        <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
+
+        {/* Các trang khác sẽ yêu cầu người dùng phải đăng nhập */}
         <Route
           path="/"
-          exact
-          element={state.isLoggedIn ? <HomePage /> : <LoginInterface />}
+          element={isAuthenticated ? <Home /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/booking"
+          element={isAuthenticated ? <Booking /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/showtime"
+          element={isAuthenticated ? <MovieDetail /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/confirmation"
+          element={isAuthenticated ? <Confirmation /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/seat"
+          element={isAuthenticated ? <SeatSelection /> : <Navigate to="/login" replace />}
         />
       </Routes>
-    </>
-  );
-}
-
-function App() {
-  const [state, setState] = useState({
-    user: null,
-    isLoggedIn: false,
-  });
-  function loginSuccess(data) {
-    console.log(data);
-    setState({
-      user: data,
-      isLoggedIn: true,
-    });
-  }
-  function getStateFromParent() {
-    return state;
-  }
-  function setStateLogOut() {
-    setState({
-      user: null,
-      isLoggedIn: false,
-    });
-  }
-  return (
-    // <Router>
-    //   {state.isLoggedIn && state.user.role === "user" && (
-    //     <User
-    //       getStateFromParent={getStateFromParent}
-    //       setStateLogOut={setStateLogOut}
-    //     />
-    //   )}
-    //   {!state.isLoggedIn && <LoginInterface loginSuccess={loginSuccess} />}
-    // </Router>
-    <Router>
-
     </Router>
   );
-}
+};
 
 export default App;
