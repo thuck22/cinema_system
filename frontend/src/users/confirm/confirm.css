@@ -1,0 +1,74 @@
+/* Container cho toàn bộ phần xác nhận */
+.confirmation-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+/* Tiêu đề chính */
+.confirmation-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Thông tin vé */
+.confirmation-container p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+}
+
+/* Nổi bật tiêu đề mạnh */
+.confirmation-container p strong {
+    color: #222;
+    font-weight: bold;
+}
+
+/* Ảnh QR Code */
+.confirmation-container img {
+    margin-top: 20px;
+    max-width: 150px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Nút xác nhận */
+.confirmation-container button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hiệu ứng hover và active cho nút */
+.confirmation-container button:hover {
+    background-color: #45a049;
+}
+
+.confirmation-container button:active {
+    transform: scale(0.98);
+}
+
+/* Thông báo xác nhận */
+.confirmation-container p.success-message {
+    margin-top: 20px;
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}

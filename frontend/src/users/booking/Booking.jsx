@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './Booking.css'; // Import file CSS
-import SeatSelection from '../seat/SeatSelection'; // Giả sử đây là component chọn ghế
+import './SeatSelection.css';
 import { useNavigate } from "react-router-dom";
 
 function Booking() {
@@ -14,11 +14,28 @@ function Booking() {
         tenRap: "Rạp 1",
     });
 
-    // Lưu thời gian đếm ngược (hard code luôn 10 phút)
-    const [time, setTime] = useState("10:00");
-
+    const [time, setTime] = useState("10:00"); // Thời gian đếm ngược
     const [selectedSeats, setSelectedSeats] = useState([]);
 
+    const handleSeatClick = (seat) => {
+        setSelectedSeats((prev) =>
+            prev.includes(seat) ? prev.filter((s) => s !== seat) : [...prev, seat]
+        );
+    };
+
+    // Các hàng ghế (A, B, C, D, E)
+    const rows = ['A', 'B', 'C', 'D', 'E'];
+    // Mỗi hàng có 10 ghế
+    const seatsPerRow = 10;
+
+    // Tạo ra mảng ghế theo cấu trúc hàng
+    const seats = rows.map(row => (
+        Array.from({ length: seatsPerRow }, (_, i) => `${row}${i + 1}`)
+    ));
+    console.log(selectedSeats)
+
+
+    // Đếm ngược thời gian
     useEffect(() => {
         const interval = setInterval(() => {
             setTime((prevTime) => {
@@ -43,18 +60,19 @@ function Booking() {
         return () => clearInterval(interval);
     }, []);
 
+    // Xác nhận đặt vé
     const handleConfirmBooking = () => {
         const ticket = {
             movie: infoBooking.tenPhim,
             seats: selectedSeats,
             time: `${infoBooking.gioChieu} - ${infoBooking.ngayChieu}`,
             cinema: infoBooking.tenCumRap,
-            qrCode: 'https://via.placeholder.com/150',
+            qrCode: 'https://via.placeholder.com/150', // Placeholder cho QR Code
         };
 
         // Lưu thông tin vé vào localStorage
         localStorage.setItem('ticket', JSON.stringify(ticket));
-        navigate('/confirmation');; // Hoặc dùng React Router để điều hướng
+        navigate('/confirmation'); // Điều hướng sang trang xác nhận
     };
 
     return (
@@ -96,8 +114,26 @@ function Booking() {
                 </div>
             </section>
 
-            {/* Component SeatSelection cho phép chọn ghế */}
-            <SeatSelection setSelectedSeats={setSelectedSeats} />
+
+            <div className="seat-selection-container">
+                <h2>Chọn ghế ngồi</h2>
+                <div className="seat-grid">
+                    {seats.map((row, rowIndex) => (
+                        <div key={rowIndex} className="seat-row">
+                            {row.map((seat) => (
+                                <button
+                                    key={seat}
+                                    className={selectedSeats.includes(seat) ? 'seat selected' : 'seat'}
+                                    onClick={() => handleSeatClick(seat)}
+                                >
+                                    {seat}
+                                </button>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+                <p>Ghế đã chọn: {selectedSeats.join(', ')}</p>
+            </div>
 
             {/* Button để xác nhận booking */}
             <button name="btn1" onClick={handleConfirmBooking}>Xác Nhận Đặt Vé</button>

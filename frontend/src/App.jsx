@@ -4,9 +4,8 @@ import Login from "./login/Login";
 import Home from "./users/Home/Home";
 import Booking from "./users/booking/Booking";
 import MovieDetail from './users/movieDetail/movieDetail';
-import SeatSelection from './users/seat/SeatSelection';
 import Navbar from './users/navbar/Navbar'; // Import Navbar component
-import Confirmation from "./users/Confirm";
+import Confirmation from "./users/confirm/Confirm";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -36,10 +35,6 @@ const App = () => {
         <Route
           path="/confirmation"
           element={isAuthenticated ? <Confirmation /> : <Navigate to="/login" replace />}
-        />
-        <Route
-          path="/seat"
-          element={isAuthenticated ? <SeatSelection /> : <Navigate to="/login" replace />}
         />
       </Routes>
     </Router>

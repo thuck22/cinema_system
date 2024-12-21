@@ -1,43 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css'; // Importing the CSS file for styling
+import { handleGetMovie } from '../../services/userService'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
     const navigate = useNavigate();
-    const movies = [
-        {
-            id: 1,
-            title: "CHỊ DÂU",
-            rating: "T16",
-            poster: "https://cinestar.com.vn/_next/image/?url=https%3A%2F%2Fapi-website.cinestar.com.vn%2Fmedia%2Fwysiwyg%2FPosters%2F12-2024%2Fchi-dau.png&w=1920&q=75",
-            releaseDate: "20.12.2024",
-            type: "2D LT"
-        },
-        {
-            id: 2,
-            title: "MUFASA: VUA SƯ TỬ",
-            rating: "P",
-            poster: "https://cinestar.com.vn/_next/image/?url=https%3A%2F%2Fapi-website.cinestar.com.vn%2Fmedia%2Fwysiwyg%2FPosters%2F12-2024%2Fmufasa-vua-su-tu.png&w=1920&q=75",
-            type: "2D LT"
-        },
-        {
-            id: 3,
-            title: "NGẢI QUỶ",
-            rating: "T16",
-            poster: "https://cinestar.com.vn/_next/image/?url=https%3A%2F%2Fapi-website.cinestar.com.vn%2Fmedia%2Fwysiwyg%2FPosters%2F12-2024%2Fngai-quy-poster.jpg&w=1920&q=75",
-            releaseDate: "15.12.2024",
-            type: "2D LT"
-        },
-        {
-            id: 4,
-            title: "404 CHẠY NGAY ĐI",
-            rating: "T16",
-            poster: "https://cinestar.com.vn/_next/image/?url=https%3A%2F%2Fapi-website.cinestar.com.vn%2Fmedia%2Fwysiwyg%2FPosters%2F12-2024%2F404-chay-ngay-di.png&w=1920&q=75",
-            releaseDate: "27.12.2024",
-            type: "2D LT"
-        }
-    ];
 
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        const fetchMovies = async () => {
+            try {
+                const response = await handleGetMovie(); // Gọi API để lấy danh sách phim
+                console.log(response)
+                const data = response.movies;
+                console.log(data)
+
+                // Định dạng dữ liệu
+                const formattedData = data.map((item) => ({
+                    id: item.movieId,
+                    name: item.movieName,
+                    duration: item.duration,
+                    trailer: item.trailer,
+                    poster: item.poster,
+                    premiereDay: item.premiereDay,
+                    label: item.movieLabel,
+                }));
+
+                setMovies(formattedData); // Lưu dữ liệu định dạng vào state
+            } catch (e) {
+                console.error(`Lỗi load danh sách phim: ${e}`);
+            }
+        };
+
+        fetchMovies();
+    }, []);
+    console.log(movies)
     const handleTrailerClick = (movieId) => {
         console.log(`Opening trailer for movie ${movieId}`);
     };
@@ -56,17 +54,17 @@ const Home = () => {
                             <div className="poster-wrapper">
                                 <img
                                     src={movie.poster}
-                                    alt={movie.title}
+                                    alt={movie.name}
                                     className="movie-poster"
                                 />
                                 <div className="rating-badge">
-                                    <div className="badge-2d">{movie.type}</div>
-                                    <div className="badge-rating">{movie.rating}</div>
+                                    <div className="badge-2d">2D</div>
+                                    <div className="badge-rating">{movie.label}</div>
                                 </div>
                             </div>
 
                             <div className="movie-info">
-                                <h3 className="movie-title">{movie.title}</h3>
+                                <h3 className="movie-title">{movie.name}</h3>
 
                                 <div className="action-buttons">
                                     <button
