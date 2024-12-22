@@ -1,15 +1,16 @@
 const express = require('express')
-const { sequelize } = require('./database/models')
-app = express()
-app.use(express.json())
+const viewEngine = require('./config/viewEngine');
+const cors = require("cors")
+const initWebRoutes = require('./route/app')
+const bodyParser = require('body-parser')
 
-app.use('/movie', require('./routes/moviesRouter'))
-app.use('/showtime', require('./routes/showtimeRouter'))
-
-app.listen(3002, async () => {
-   console.log('Server is running')
-   await sequelize.authenticate()
-   console.log('Database connected \n')
-   await sequelize.sync({ alter: false })
-   console.log('Database synced \n')
+const app = express()
+app.use(cors({ origin: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+const port = 8000
+viewEngine(app)
+initWebRoutes(app)
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
 })

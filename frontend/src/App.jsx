@@ -1,51 +1,73 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { adminRouter, errRouter, mainRouter } from "./configs/router";
-import RouterMainTemplate from "./templates/main/index";
-import RouterAdminTemplate from "./templates/admin/index";
-import RouterErrTemplate from "./templates/Err/index";
-import "./App.scss";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import Login from "./login/Login";
+import Home from "./users/Home/Home";
+import Booking from "./users/booking/Booking";
+import MovieDetail from './users/movieDetail/movieDetail';
+import Navbar from './users/navbar/Navbar'; // Import Navbar component
+import Confirm from "./users/confirm/Confirm";
+import CRUD from './admin/CRUD';
+import NavbarAdmin from './admin/navbar/Navbar'; // Import NavbarAdmin component
 
-function App() {
-  const renderMainRouter = () => {
-    return mainRouter.map(({ path, exact, Component }) => (
-      <Route
-        key={path}
-        path={path}
-        element={<RouterMainTemplate Component={Component} />}
-      />
-    ));
-  };
-
-  const renderAdminRouter = () => {
-    return adminRouter.map(({ path, exact, Component }) => (
-      <Route
-        key={path}
-        path={path}
-        element={<RouterAdminTemplate Component={Component} />}
-      />
-    ));
-  };
-
-  const renderErrRouter = () => {
-    return errRouter.map(({ path, exact, Component }) => (
-      <Route
-        key={path}
-        path={path}
-        element={<RouterErrTemplate Component={Component} />}
-      />
-    ));
-  };
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [userRole, setUserRole] = React.useState(null); // Lưu vai trò của người dùng
 
   return (
-    <BrowserRouter>
+    <Router>
+      {/* Hiển thị Navbar phù hợp dựa trên vai trò */}
+      {isAuthenticated && (userRole === "admin" ? <NavbarAdmin /> : <Navbar />)}
+
       <Routes>
-        {renderMainRouter()}
-        {renderAdminRouter()}
-        {renderErrRouter()}
+        {/* Route cho Login */}
+        <Route
+          path="/login"
+          element={
+            <Login
+              onLogin={(role) => {
+                setIsAuthenticated(true);
+                setUserRole(role);
+              }}
+            />
+          }
+        />
+
+        {/* Các trang khác sẽ yêu cầu người dùng phải đăng nhập */}
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              <Home />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="/booking"
+          element={isAuthenticated ? <Booking /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/showtime"
+          element={isAuthenticated ? <MovieDetail /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/confirm"
+          element={isAuthenticated ? <Confirm /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/admin/crud"
+          element={
+            isAuthenticated && userRole === "admin" ? (
+              <CRUD />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
-}
+};
 
 export default App;

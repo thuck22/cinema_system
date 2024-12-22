@@ -1,0 +1,148 @@
+body {
+    background: linear-gradient(to bottom, #7158df, #563f89);
+    /* Nền toàn trang với 3 màu */
+}
+
+/* Đặt chiều cao cho section booking */
+.booking-section {
+    /* Nền gradient xám nhạt sang xám đậm */
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Container chứa toàn bộ thông tin booking */
+.booking-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Các phần của thông tin phim */
+.movie-details {
+    flex: 1;
+    background: linear-gradient(to top, #5c6cd1, #eaeaea);
+    /* Gradient trắng lên xám nhạt */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-banner img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.movie-description {
+    margin-top: 20px;
+}
+
+.movie-description h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.movie-description p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Phần thông tin đặt vé */
+.booking-info {
+    background: linear-gradient(to top, #5c6cd1, #eaeaea);
+    flex: 1;
+    /* Gradient trắng sang xám nhạt */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.booking-item {
+    margin-bottom: 15px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-item span:first-child {
+    font-weight: bold;
+    color: #333;
+}
+
+.booking-item span:last-child {
+    color: #555;
+}
+
+/* Phần ghế chọn */
+.seats-container {
+    display: flex;
+    background: linear-gradient(to top, #5c6cd1, #eaeaea);
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.seat {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.seat.selected {
+    background: linear-gradient(to bottom, #4CAF50, #2e8b57);
+    /* Gradient xanh lá nổi bật */
+    color: white;
+    font-weight: bold;
+}
+
+.seat:hover {
+    background-color: #ddd;
+}
+
+/* Button xác nhận */
+button[name="btn1"] {
+    display: block;
+    position: relative;
+    left: 40%;
+    width: 20%;
+    padding: 15px;
+    background: linear-gradient(to right, #28a745, #34d058);
+    /* Gradient xanh */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+button[name="btn1"]:hover {
+    background: linear-gradient(to right, #218838, #2a9d52);
+    /* Đậm hơn khi hover */
+}
+
+button[name="btn1"]:active {
+    background-color: #79ed94;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .booking-container {
+        flex-direction: column;
+    }
+
+    .movie-details,
+    .booking-info {
+        flex: none;
+        width: 100%;
+    }
+}

@@ -1,0 +1,60 @@
+/* Định dạng chung cho MovieDetail */
+.movie-detail {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 80px;
+    /* Khoảng cách trên để tránh đè lên Navbar */
+}
+
+.movie-detail h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.movie-detail p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.movie-detail h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 20px;
+}
+
+.movie-detail ul {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 4vh;
+    left: 0;
+    width: 100%;
+}
+
+.movie-detail li {
+    background-color: #f1f1f1;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: #555;
+}
+
+.movie-detail li:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+.movie-detail li span {
+    font-weight: bold;
+    color: #333;
+}

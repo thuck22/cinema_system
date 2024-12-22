@@ -1,0 +1,77 @@
+/* Thêm nền cho trang */
+.seat-selection-container {
+    background: linear-gradient(to top, #5c6cd1, #eaeaea);
+    text-align: center;
+    margin: 20px;
+    background-color: #f4f4f9;
+    /* Nền sáng cho trang */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Tạo bóng nhẹ cho nền */
+}
+
+/* Định dạng cho tiêu đề */
+h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Cấu trúc lưới ghế ngồi */
+.seat-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Định dạng cho từng hàng ghế */
+.seat-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Định dạng cho từng ghế */
+.seat {
+    width: 30px;
+    /* Thu nhỏ kích thước ghế */
+    height: 30px;
+    /* Thu nhỏ kích thước ghế */
+    border: 2px solid #ccc;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    /* Thu nhỏ font chữ */
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Khi ghế được chọn */
+.seat.selected {
+    background-color: #4caf50;
+    /* Màu nền khi ghế được chọn */
+    color: white;
+    transform: scale(1.2);
+    /* Tăng kích thước một chút khi chọn */
+}
+
+/* Hiệu ứng hover khi di chuột qua ghế */
+.seat:hover {
+    background-color: #ddd;
+    transform: scale(1.1);
+    /* Tăng kích thước một chút khi di chuột qua */
+}
+
+/* Hiển thị các ghế đã chọn */
+p {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 20px;
+}
