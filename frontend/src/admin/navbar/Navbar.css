@@ -1,0 +1,54 @@
+body {
+    margin: 0
+}
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar a {
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+button[name="logout"] {
+    background-color: #cb4027;
+    /* Màu nền xanh */
+    color: white;
+    /* Màu chữ trắng */
+    border: none;
+    /* Loại bỏ đường viền */
+    border-radius: 5px;
+    /* Bo góc nút */
+    padding: 10px 15px;
+    /* Khoảng cách bên trong nút */
+    cursor: pointer;
+    /* Con trỏ chuột dạng nhấp khi hover */
+    position: fixed;
+    /* Đặt vị trí cố định trên màn hình */
+    right: 1%;
+    /* Cách mép phải màn hình 2% */
+    top: 0.4%;
+    /* Cách mép trên màn hình 10px */
+    width: auto;
+    /* Kích thước chiều rộng tự động, không cố định */
+    font-size: 16px;
+    /* Kích thước chữ */
+    transition: background-color 0.3s ease;
+    /* Hiệu ứng chuyển đổi màu khi hover */
+}
+
+button[name="logout"]:hover {
+    background-color: #e5881e;
+    /* Màu xanh đậm hơn khi hover */
+}

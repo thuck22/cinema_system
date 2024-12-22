@@ -1,6 +1,11 @@
+body {
+    background: linear-gradient(to bottom, #7158df, #563f89);
+    /* Nền toàn trang với 3 màu */
+}
+
 /* Đặt chiều cao cho section booking */
 .booking-section {
-    background-color: #f4f4f4;
+    /* Nền gradient xám nhạt sang xám đậm */
     padding: 20px;
     margin-top: 20px;
 }
@@ -15,7 +20,8 @@
 /* Các phần của thông tin phim */
 .movie-details {
     flex: 1;
-    background-color: #fff;
+    background: linear-gradient(to top, #5c6cd1, #eaeaea);
+    /* Gradient trắng lên xám nhạt */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -45,8 +51,9 @@
 
 /* Phần thông tin đặt vé */
 .booking-info {
+    background: linear-gradient(to top, #5c6cd1, #eaeaea);
     flex: 1;
-    background-color: #fff;
+    /* Gradient trắng sang xám nhạt */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -72,6 +79,7 @@
 /* Phần ghế chọn */
 .seats-container {
     display: flex;
+    background: linear-gradient(to top, #5c6cd1, #eaeaea);
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 20px;
@@ -88,8 +96,10 @@
 }
 
 .seat.selected {
-    background-color: #4CAF50;
+    background: linear-gradient(to bottom, #4CAF50, #2e8b57);
+    /* Gradient xanh lá nổi bật */
     color: white;
+    font-weight: bold;
 }
 
 .seat:hover {
@@ -103,7 +113,8 @@ button[name="btn1"] {
     left: 40%;
     width: 20%;
     padding: 15px;
-    background-color: #28a745;
+    background: linear-gradient(to right, #28a745, #34d058);
+    /* Gradient xanh */
     color: white;
     border: none;
     border-radius: 8px;
@@ -115,7 +126,8 @@ button[name="btn1"] {
 }
 
 button[name="btn1"]:hover {
-    background-color: #218838;
+    background: linear-gradient(to right, #218838, #2a9d52);
+    /* Đậm hơn khi hover */
 }
 
 button[name="btn1"]:active {

@@ -1,44 +1,55 @@
-/* Tạo kiểu chung cho container */
+/* CSS (login.css) */
 .login-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+}
+
+.login-card {
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    padding: 20px;
     text-align: center;
 }
 
-/* Định dạng tiêu đề */
-h1 {
-    font-size: 24px;
+.login-header {
     margin-bottom: 20px;
-    color: #333;
 }
 
-/* Định dạng trường nhập liệu */
-input[type="text"],
-input[type="password"] {
-    width: 100%;
+.logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.login-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-input {
     padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
+}
+
+.login-input:focus {
+    border-color: #0056b3;
     outline: none;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #5cb85c;
-    box-shadow: 0 0 5px rgba(92, 184, 92, 0.5);
-}
-
-/* Định dạng nút bấm */
-button {
-    width: 100%;
+.login-button {
     padding: 10px;
-    background-color: #5cb85c;
+    background-color: #0056b3;
     color: white;
     border: none;
     border-radius: 5px;
@@ -47,12 +58,12 @@ button {
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #4cae4c;
+.login-button:hover {
+    background-color: #004494;
 }
 
-/* Cải thiện bố cục và khoảng cách */
-input,
-button {
-    margin-bottom: 15px;
+@media (max-width: 480px) {
+    .login-card {
+        width: 90%;
+    }
 }

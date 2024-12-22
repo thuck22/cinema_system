@@ -1,5 +1,6 @@
 /* Thêm nền cho trang */
 .seat-selection-container {
+    background: linear-gradient(to top, #5c6cd1, #eaeaea);
     text-align: center;
     margin: 20px;
     background-color: #f4f4f9;

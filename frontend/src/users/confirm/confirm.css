@@ -1,74 +1,57 @@
-/* Container cho toàn bộ phần xác nhận */
-.confirmation-container {
-    max-width: 600px;
-    margin: 50px auto;
+/* CSS (confirm.css) */
+.confirm-container {
+    background: linear-gradient(to bottom, #7057e2, #bebbbb, #9c6de3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+.ticket-info {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    font-family: 'Arial', sans-serif;
+    width: 400px;
     text-align: center;
 }
 
-/* Tiêu đề chính */
-.confirmation-container h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
+.ticket-details {
+    margin-top: 20px;
+    text-align: left;
 }
 
-/* Thông tin vé */
-.confirmation-container p {
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
     font-size: 16px;
-    margin: 10px 0;
-    color: #555;
 }
 
-/* Nổi bật tiêu đề mạnh */
-.confirmation-container p strong {
-    color: #222;
+.ticket-item span:first-child {
     font-weight: bold;
 }
 
-/* Ảnh QR Code */
-.confirmation-container img {
-    margin-top: 20px;
-    max-width: 150px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Nút xác nhận */
-.confirmation-container button {
-    display: inline-block;
-    margin-top: 20px;
+button {
     padding: 10px 20px;
     font-size: 16px;
-    font-weight: bold;
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: #0056b3;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s;
 }
 
-/* Hiệu ứng hover và active cho nút */
-.confirmation-container button:hover {
-    background-color: #45a049;
+button:hover {
+    background-color: #004494;
 }
 
-.confirmation-container button:active {
-    transform: scale(0.98);
-}
-
-/* Thông báo xác nhận */
-.confirmation-container p.success-message {
-    margin-top: 20px;
-    color: green;
-    font-weight: bold;
-    font-size: 18px;
+.payment-success {
     text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: green;
 }

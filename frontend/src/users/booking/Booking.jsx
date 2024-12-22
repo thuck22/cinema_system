@@ -2,18 +2,14 @@ import React, { useEffect, useState } from "react";
 import './Booking.css'; // Import file CSS
 import './SeatSelection.css';
 import { useNavigate } from "react-router-dom";
+import { handleGetMovie } from "../../services/userService";
+import { handleGetShowTime } from "../../services/userService";
 
 function Booking() {
     const navigate = useNavigate();
-    const [infoBooking, setInfoBooking] = useState({
-        tenPhim: "Avengers: Endgame",
-        moTa: "Phim siêu anh hùng hấp dẫn, kết thúc cuộc chiến với Thanos.",
-        tenCumRap: "CGV Cinemas",
-        gioChieu: "20:00",
-        ngayChieu: "24/12/2024",
-        tenRap: "Rạp 1",
-    });
-
+    const movieId = localStorage.getItem('mvID');
+    const [infoBooking, setInfoBooking] = useState({});
+    const [showTime, setShowTime] = useState([]);
     const [time, setTime] = useState("10:00"); // Thời gian đếm ngược
     const [selectedSeats, setSelectedSeats] = useState([]);
 
@@ -32,11 +28,54 @@ function Booking() {
     const seats = rows.map(row => (
         Array.from({ length: seatsPerRow }, (_, i) => `${row}${i + 1}`)
     ));
-    console.log(selectedSeats)
-
 
     // Đếm ngược thời gian
     useEffect(() => {
+        // Hàm fetch danh sách phim
+        const fetchMovies = async () => {
+            try {
+                const response = await handleGetMovie(movieId); // Gọi API để lấy danh sách phim
+                const movieData = response.movie; // Lấy dữ liệu phim từ response (theo cấu trúc bạn cung cấp)
+
+                // Cập nhật state infoBooking với dữ liệu phim
+                setInfoBooking({
+                    movieId: movieData.movieId,
+                    movieName: movieData.movieName,
+                    duration: movieData.duration,
+                    trailer: movieData.trailer,
+                    poster: movieData.poster,
+                    // Bạn có thể thêm các trường khác từ response nếu cần
+                });
+
+            } catch (e) {
+                console.error(`Lỗi load phim: ${e}`);
+            }
+        };
+
+        const fetchShow = async () => {
+            try {
+                const response = await handleGetShowTime(movieId); // Gọi API để lấy danh sách phim
+                const data = response.showTime; // Lấy dữ liệu phim từ response (theo cấu trúc bạn cung cấp)
+
+                // Cập nhật state infoBooking với dữ liệu phim
+                setShowTime({
+                    id: data.showtimeId,
+                    format: data.format,
+                    day: data.showDay,
+                    startTime: data.startTime,
+                    endTime: data.endTime,
+                    movieId: data.movieId,
+                    room: data.cinemaRoomId,
+                });
+
+            } catch (e) {
+                console.error(`Lỗi load suất chiếu: ${e}`);
+            }
+        };
+
+        fetchMovies();
+        fetchShow();
+
         const interval = setInterval(() => {
             setTime((prevTime) => {
                 const [minutes, seconds] = prevTime.split(":").map(Number);
@@ -58,21 +97,31 @@ function Booking() {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [movieId]);
 
-    // Xác nhận đặt vé
+
     const handleConfirmBooking = () => {
         const ticket = {
-            movie: infoBooking.tenPhim,
+            movie: infoBooking.movieName,
             seats: selectedSeats,
-            time: `${infoBooking.gioChieu} - ${infoBooking.ngayChieu}`,
-            cinema: infoBooking.tenCumRap,
+            time: `${formatTime(showTime.startTime)} - ${formatTime(showTime.endTime)}`,
+            cinema: 'Cinema_HCMUT_DA', // Giả sử lấy tên rạp này
             qrCode: 'https://via.placeholder.com/150', // Placeholder cho QR Code
         };
 
         // Lưu thông tin vé vào localStorage
         localStorage.setItem('ticket', JSON.stringify(ticket));
-        navigate('/confirmation'); // Điều hướng sang trang xác nhận
+
+        // Điều hướng sang trang xác nhận
+        navigate('/confirm');
+    };
+
+
+    const formatTime = (isoString) => {
+        const date = new Date(isoString); // Convert the ISO string to a Date object
+        const hours = date.getHours(); // Get the hour part
+        const minutes = date.getMinutes(); // Get the minutes part
+        return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`; // Format as HH:MM
     };
 
     return (
@@ -82,29 +131,31 @@ function Booking() {
                     <div className="movie-details">
                         <div className="movie-banner">
                             <img
-                                style={{ width: "100%" }}
-                                src="/img/bg-screen.png"
+                                style={{ width: "10%" }}
+                                src={infoBooking.poster}
                                 alt="movie-screen"
                             />
                         </div>
                         <div className="movie-description">
-                            <h3>{infoBooking.tenPhim}</h3>
-                            <p>{infoBooking.moTa}</p>
+                            <h3>{infoBooking.movieName}</h3>
+                            <p>Thời lượng: {infoBooking.duration}</p>
                         </div>
                     </div>
 
                     <div className="booking-info">
                         <div className="booking-item">
                             <span>Tên Rạp:</span>
-                            <span>{infoBooking.tenCumRap}</span>
+                            <span>Cinema_HCMUT_DA</span>
                         </div>
                         <div className="booking-item">
-                            <span>Xuất chiếu:</span>
-                            <span>{infoBooking.gioChieu} - {infoBooking.ngayChieu}</span>
+                            <span>Suất chiếu:</span>
+                            <span>{formatTime(showTime.startTime)} - {formatTime(showTime.endTime)}</span>
+
                         </div>
                         <div className="booking-item">
                             <span>Phòng chiếu:</span>
-                            <span>{infoBooking.tenRap}</span>
+                            <span>{showTime.room}</span>
+
                         </div>
                         <div className="booking-item">
                             <span>Time hold the chair:</span>
@@ -113,7 +164,6 @@ function Booking() {
                     </div>
                 </div>
             </section>
-
 
             <div className="seat-selection-container">
                 <h2>Chọn ghế ngồi</h2>

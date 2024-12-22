@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css'; // Importing the CSS file for styling
-import { handleGetMovie } from '../../services/userService'
+import { handleGetAllMovie } from '../../services/userService'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
@@ -11,10 +11,8 @@ const Home = () => {
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await handleGetMovie(); // Gọi API để lấy danh sách phim
-                console.log(response)
+                const response = await handleGetAllMovie(); // Gọi API để lấy danh sách phim
                 const data = response.movies;
-                console.log(data)
 
                 // Định dạng dữ liệu
                 const formattedData = data.map((item) => ({
@@ -35,13 +33,14 @@ const Home = () => {
 
         fetchMovies();
     }, []);
-    console.log(movies)
     const handleTrailerClick = (movieId) => {
         console.log(`Opening trailer for movie ${movieId}`);
     };
 
     const handleBookingClick = (movieId) => {
-        // console.log(`Opening booking for movie ${movieId}`);
+        // console.log(`Opening booking for movie ${movieId}`)
+        localStorage.setItem('mvID', movieId);
+
         navigate(`/booking`);
     };
 

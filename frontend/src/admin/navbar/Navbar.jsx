@@ -9,7 +9,6 @@ const NavbarAdmin = () => { // Nhận hàm onLogout qua props
         <nav className="navbar">
             <Link to="/">Trang chủ</Link>
             <Link to="/showtime">Lịch chiếu</Link>
-            <Link to="/seat">Đặt vé</Link>
             <Link to="/confirmation">Liên hệ</Link>
             <Link to="/admin/crud">CRUD Phim</Link>
             <button onClick={() => { navigate("/login") }} name="logout">Đăng xuất</button>
