@@ -1,0 +1,33 @@
+{
+  "development": {
+    "dialect": "mssql",
+    "type": "mssqlsv",
+    "localhost": "localhost",
+    "port": 1433,
+    "username": "sa",
+    "password": "a",
+    "database": "CinemaDB",
+    "synchronize": true,
+    "dialectOptions": {
+      "options": {
+        "encrypt": false,
+        "trustServerCertificate": true
+      }
+    },
+    "logging": false
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
