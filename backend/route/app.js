@@ -11,6 +11,8 @@ let initWebRoutes = (app) => {
 
     router.get("/showTime/:id", movieController.handleGetShowTime);
 
+    router.post("/ticket", movieController.handleCreateTicket);
+
 
     return app.use("/", router);
 };

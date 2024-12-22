@@ -16,4 +16,8 @@ const handleGetShowTime = (movieId) => {
     return axios.get(`/showTime/${movieId}`);
 }
 
-export { handleLogin, handleGetMovie, handleGetAllMovie, handleGetShowTime }
+const handleCreateTicket = (ticket) => {
+    return axios.post("/ticket", ticket);
+}
+
+export { handleLogin, handleGetMovie, handleGetAllMovie, handleGetShowTime, handleCreateTicket };

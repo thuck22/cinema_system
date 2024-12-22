@@ -103,10 +103,11 @@ function Booking() {
     const handleConfirmBooking = () => {
         const ticket = {
             movie: infoBooking.movieName,
-            seats: selectedSeats,
+            showTimeId: showTime.id,
+            seatId: selectedSeats,
+            roomId: showTime.room,
             time: `${formatTime(showTime.startTime)} - ${formatTime(showTime.endTime)}`,
             cinema: 'Cinema_HCMUT_DA', // Giả sử lấy tên rạp này
-            qrCode: 'https://via.placeholder.com/150', // Placeholder cho QR Code
         };
 
         // Lưu thông tin vé vào localStorage

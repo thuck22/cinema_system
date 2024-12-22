@@ -1,5 +1,6 @@
+
 const db = require("../models/index");
-const { Sequelize } = require("sequelize");
+const { Sequelize, INTEGER } = require("sequelize");
 
 let handleGetMovies = () => {
     return new Promise(async (resolve, reject) => {
@@ -133,7 +134,41 @@ let handleGetShowTime = (movieId) => {
             reject(error);
         }
     });
-}
+};
+const handleCreateTicket = async (ticketData) => {
+    try {
+        if (!ticketData) {
+            throw new Error("Ticket data is required.");
+        }
+
+        console.log("Ticket data:", ticketData);
+
+        const result = await db.sequelize.query(
+            `EXEC AddTicket :showtimeId, :seatId, :roomId, :ticketId, :ticketPrice, :boughtTime, :orderId`,
+            {
+                replacements: {
+                    showtimeId: ticketData.showtimeId,  // Show time id
+                    seatId: ticketData.seatId,          // Seat id
+                    roomId: ticketData.roomId,          // Room id
+                    ticketId: null, // Ticket id, có thể null trong trường hợp tạo mới
+                    ticketPrice: ticketData.ticketPrice, // Ticket price
+                    boughtTime: ticketData.boughtTime,  // Time when the ticket was bought
+                    orderId: ticketData.orderId         // Order id related to the ticket
+                },
+                type: Sequelize.QueryTypes.RAW
+            }
+        );
+        console.log("New ticket ID created:", result);
+
+        return { ticketId: result };
+    } catch (error) {
+        console.error("Error while executing stored procedure:", error.message);
+        throw error;  // Ném lỗi ra ngoài để có thể xử lý ở nơi gọi hàm
+    }
+};
+
+
+
 
 module.exports = {
     handleGetMovies: handleGetMovies,
@@ -142,4 +177,5 @@ module.exports = {
     handleGetMovieID: handleGetMovieID,
     handleGetShowTime: handleGetShowTime,
     handleDeleteMovie: handleDeleteMovie,
+    handleCreateTicket: handleCreateTicket
 };

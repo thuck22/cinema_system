@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             seatId: DataTypes.STRING,
             roomId: DataTypes.STRING,
             ticketPrice: DataTypes.INTEGER,
-            boughtTime: DataTypes.TIME,
+            boughtTime: DataTypes.STRING,
             orderId: DataTypes.STRING
         },
         {

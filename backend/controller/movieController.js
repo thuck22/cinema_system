@@ -78,11 +78,41 @@ let handleGetShowTime = async (req, res) => {
     });
 }
 
+let handleCreateTicket = async (req, res) => {
+    try {
+        // Lấy dữ liệu từ body
+        let data = req.body;
+
+        // Kiểm tra dữ liệu đầu vào
+        if (!data) {
+            return res.status(400).json({
+                message: "Missing required data"
+            });
+        }
+
+        // Gọi hàm trong service để thêm vé
+        let newTicket = await movieService.handleCreateTicket(data);
+
+        // Trả kết quả thành công
+        return res.status(201).json({
+            message: "Ticket created successfully",
+            data: newTicket
+        });
+    } catch (e) {
+        console.error("Error creating ticket:", e); // Ghi log lỗi để theo dõi
+        return res.status(500).json({
+            message: "Internal server error",
+            error: e.message || "Unknown error" // Trả lỗi rõ ràng hơn
+        });
+    }
+}
+
 module.exports = {
     handleGetMovies: handleGetMovies,
     handleAddMovies: handleAddMovies,
     handleUpdateMovie: handleUpdateMovie,
     handleDeleteMovie: handleDeleteMovie,
     handleGetMovieID: handleGetMovieID,
-    handleGetShowTime: handleGetShowTime
+    handleGetShowTime: handleGetShowTime,
+    handleCreateTicket: handleCreateTicket,
 };
